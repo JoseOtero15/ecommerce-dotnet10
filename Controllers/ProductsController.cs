@@ -19,7 +19,7 @@ namespace ApiEcommerce.Controllers
       _categoryRepository = categoryRepository;
       _mapper = mapper;
     }
-    
+
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -170,16 +170,11 @@ namespace ApiEcommerce.Controllers
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     public IActionResult DeleteProduct(int productId)
     {
-      if (productId == 0)
-      {
-        return BadRequest(ModelState);
-      }
-
+      if (productId == 0) return BadRequest(ModelState);
+      
       var product = _productRepository.GetProduct(productId);
-      if (product == null)
-      {
-        return NotFound($"El producto con el id {productId} no existe");
-      }
+      if (product == null)  return NotFound($"El producto con el id {productId} no existe");
+      
       if (!_productRepository.DeleteProduct(product))
       {
         ModelState.AddModelError("CustomError", $"Algo salió mal al eliminar el registro {product.Name}");
