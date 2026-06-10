@@ -28,6 +28,9 @@ publish/
 
 # Secrets locales
 secrets.json
+.env
 
 # Configuración local
 appsettings.Development.json
+
+.gitignore

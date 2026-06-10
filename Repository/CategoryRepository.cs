@@ -11,12 +11,12 @@ public class CategoryRepository : ICategoryRepository
     {
         _db = db;
     }
-    public bool CategoryExist(int id)
+    public bool CategoryExists(int id)
     {
         return _db.Categories.Any( c => c.Id == id);
     }
 
-    public bool CategoryExist(string name)
+    public bool CategoryExists(string name)
     {
         return _db.Categories.Any( c => c.Name.ToLower().Trim() == name.ToLower().Trim());
     }
@@ -39,9 +39,9 @@ public class CategoryRepository : ICategoryRepository
         return _db.Categories.OrderBy(c => c.Name).ToList();
     }
 
-    public Category GetCategory(int id)
+    public Category? GetCategory(int id)
     {
-        return _db.Categories.FirstOrDefault(c => c.Id == id) ?? throw new InvalidOperationException($"La categoría con el id {id} no existe");
+        return _db.Categories.FirstOrDefault(c => c.Id == id);
     }
 
     public bool Save()
