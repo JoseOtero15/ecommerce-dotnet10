@@ -1,7 +1,8 @@
 using ApiEcommerce.Models.Dtos;
 using ApiEcommerce.Repository.IRepository;
+using ApiEcommerce.Constants;
+using Microsoft.AspNetCore.Cors;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiEcommerce.Controllers
@@ -16,6 +17,21 @@ namespace ApiEcommerce.Controllers
         {
             _categoryRepository = categoryRepository;
             _mapper = mapper;
+        }
+
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        //[EnableCors(PolicyNames.AllowSpecificOrigin)]
+        public IActionResult GetCategories()
+        {
+            var categories = _categoryRepository.GetCategories();
+            var categoriesDto = new List<CategoryDto>();
+            foreach (var category in categories)
+            {
+                categoriesDto.Add(_mapper.Map<CategoryDto>(category));
+            }
+            return Ok(categoriesDto);
         }
 
         [HttpGet("{id:int}", Name = "GetCategory")]
