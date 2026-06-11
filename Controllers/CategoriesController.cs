@@ -1,4 +1,4 @@
-using ApiEcommerce.Models.DTOs;
+using ApiEcommerce.Models.Dtos;
 using ApiEcommerce.Repository.IRepository;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;

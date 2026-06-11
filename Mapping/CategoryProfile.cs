@@ -1,5 +1,5 @@
 using System;
-using ApiEcommerce.Models.DTOs;
+using ApiEcommerce.Models.Dtos;
 using AutoMapper;
 
 namespace ApiEcommerce.Mapping;
